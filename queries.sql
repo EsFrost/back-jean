@@ -24,7 +24,6 @@ SELECT * FROM posts p
 JOIN categories c ON p.categoryId = c.id
 WHERE p.id = ?;
 
-SELECT * FROM categories;
 
 ---
 SELECT * FROM posts p 
@@ -34,13 +33,20 @@ JOIN categories c ON p.categoryId = c.id;
 INSERT INTO posts (author, postedAt, message, latitude, longitude, picture, categoryId) VALUES
 (?, ?, ?, ?, ?, ?, ?);
 
-INSERT INTO categories (label) VALUES
-(?);
-
 ---
 UPDATE posts SET author = ?, postedAt = ?, message = ?, latitude = ?, longitude = ?, picture = ?, categoryId = ? WHERE id = ?;
 
 ---
 DELETE FROM posts WHERE id = ?;
+
+
+SELECT * FROM categories;
+
+SELECT * FROM categories WHERE id = ?;
+
+INSERT INTO categories (label) VALUES
+(?);
+
+UPDATE categories SET label = ? WHERE id = ?;
 
 DELETE FROM categories WHERE id = ?;
