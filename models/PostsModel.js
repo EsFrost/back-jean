@@ -21,12 +21,16 @@ const getPost = (p_id) => {
     })
 }
 
-const createPost = (data) => {
+const createPost = (author, postedAt, message, latitude, longitude, picture, categoryId) => {
     return new Promise((resolve, reject) => {
-        conn.query(`INSERT INTO posts SET ?`, data, (err, result) => {
-            if (err) return reject(err)
-            resolve(result)
-    })
+      conn.query(
+        'INSERT INTO posts (author, postedAt, message, latitude, longitude, picture, categoryId) VALUES (?, ?, ?, ?, ?, ?, ?)',
+        [author, postedAt, message, latitude, longitude, picture, categoryId],
+        (err, result) => {
+          if (err) return reject(err)
+          resolve(result)
+        }
+      )
     })
 }
 

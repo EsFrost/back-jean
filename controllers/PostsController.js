@@ -11,9 +11,21 @@ const getPost = async (req, res) => {
 }
 
 const createPost = async (req, res) => {
-    const post = await postModel.createPost(req.body)
-    res.status(200).json(post)
-}
+    try {
+      const result = await postModel.createPost(
+        req.body.author,
+        req.body.postedAt,
+        req.body.message,
+        req.body.latitude,
+        req.body.longitude,
+        req.body.picture,
+        req.body.categoryId
+      )
+      res.status(200).json(result)
+    } catch (error) {
+      res.status(500).json({ error: error.message })
+    }
+  }
 
 const updatePost = async (req, res) => {
     const post = await postModel.updatePost(req.body, req.params.id)
