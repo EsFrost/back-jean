@@ -2,8 +2,9 @@ const conn = require('../utils/db')
 
 const getPosts = () => {
     return new Promise((resolve, reject) => {
-        conn.query(`SELECT * FROM posts p 
-        JOIN categories c ON p.categoryId = c.id`, (err, result) => {
+        conn.query(`SELECT p.id, p.author, p.postedAt, p.message, p.latitude, p.longitude, p.picture, p.categoryId, c.label 
+FROM posts p 
+JOIN categories c ON p.categoryId = c.id`, (err, result) => {
             if (err) return reject(err)
             resolve(result)
     })
